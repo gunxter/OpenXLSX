@@ -25,23 +25,12 @@ XLCellValue& XLCellValue::operator=(const char* stringValue) {
     return *this;
 }
 
-XLCellValue& XLCellValue::operator=(const std::string& stringValue) {
-
-    *m_value = stringValue;
-    return *this;
-}
-
-std::string XLCellValue::AsString() const {
-
-    return m_value->AsString();
+void XLCellValue::AsString(char* buf, unsigned int bufLen) const {
+	const std::string str = m_value->AsString();
+	strncpy(buf, str.c_str(), bufLen);
 }
 
 void XLCellValue::Set(const char* stringValue) {
-
-    m_value->Set(stringValue);
-}
-
-void XLCellValue::Set(const std::string& stringValue) {
 
     m_value->Set(stringValue);
 }

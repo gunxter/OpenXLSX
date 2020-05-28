@@ -11,12 +11,12 @@ XLSheet::XLSheet(Impl::XLSheet& sheet)
         : m_sheet(&sheet) {
 }
 
-std::string const XLSheet::Name() const {
+/*XLString const XLSheet::Name() const {
 
     return m_sheet->Name();
-}
+}*/
 
-void XLSheet::SetName(const std::string& name) {
+void XLSheet::SetName(const XLString& name) {
 
     m_sheet->SetName(name);
 }

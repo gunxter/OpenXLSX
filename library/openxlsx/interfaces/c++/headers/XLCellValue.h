@@ -47,9 +47,10 @@ YM      M9  MM    MM MM       MM    MM   d'  `MM.    MM            MM   d'  `MM.
 #define OPENXLSX_XLCELLVALUE_H
 
 #include "openxlsx_export.h"
+#include "XLString.h"
 #include "XLDefinitions.h"
 #include <type_traits>
-#include <string>
+
 
 namespace OpenXLSX
 {
@@ -70,7 +71,7 @@ namespace OpenXLSX
      * An XLCellValue object is not created directly by the user, but rather accessed and/or modified through the XLCell
      * interface (the Value() member function).
      * The value can be set either through the Set() member function or the operator=(). Both have been overloaded to take
-     * any integer or floating point value, bool value or string value (either std::string or char* string). In order to
+     * any integer or floating point value, bool value or string value (either XLString or char* string). In order to
      * set the cell value to empty, use the Clear() member function.
      *
      * It is also possible to assign one XLCellValue to another, using the overloaded copy assignment operator (operator=()).
@@ -83,8 +84,8 @@ namespace OpenXLSX
      *
      * To get the current value of an XLCellValue object, use the Get<>() member function. The Get<>() member function is a
      * template function, taking the value return type as template argument. It has been overloaded to take any integer
-     * or floating point type, bool type or string type that can be constructed from a char* string (e.g. std::string or
-     * std::string_view). It is also possible to get the value as a std::string, regardless of the value type, using the
+     * or floating point type, bool type or string type that can be constructed from a char* string (e.g. XLString or
+     * XLString_view). It is also possible to get the value as a XLString, regardless of the value type, using the
      * AsString() member function.
      *
      * ### Example ###
@@ -99,7 +100,7 @@ namespace OpenXLSX
 
      * auto A1 = wks->Cell("A1")->Value().Get<double>();
      * auto B1 = wks->Cell("B1")->Value().Get<int>();
-     * auto C1 = wks->Cell("C1")->Value().Get<std::string>();
+     * auto C1 = wks->Cell("C1")->Value().Get<XLString>();
      * auto D1 = wks->Cell("D1")->Value().Get<bool>();
 
      * cout << "Cell A1: " << A1 << endl;
@@ -170,16 +171,9 @@ namespace OpenXLSX
 
         /**
          * @brief
-         * @param stringValue
          * @return
          */
-        XLCellValue& operator=(const std::string& stringValue);
-
-        /**
-         * @brief
-         * @return
-         */
-        std::string AsString() const;
+        void AsString(char* buf, unsigned int bufLen) const;
 
         /**
          * @brief
@@ -202,12 +196,6 @@ namespace OpenXLSX
          * @param stringValue
          */
         void Set(const char* stringValue);
-
-        /**
-         * @brief
-         * @param stringValue
-         */
-        void Set(const std::string& stringValue);
 
         /**
          * @brief
@@ -320,7 +308,7 @@ namespace OpenXLSX
     template<typename T, typename std::enable_if<std::is_integral<T>::value, long long int>::type*>
     void XLCellValue::Set(T numberValue) {
 
-        if constexpr (std::is_same<T, bool>::value) { // if bool
+        if (std::is_same<T, bool>::value) { // if bool
             SetBoolean(numberValue);
         }
         else { // if not bool
@@ -343,7 +331,7 @@ namespace OpenXLSX
     template<typename T, typename std::enable_if<std::is_integral<T>::value, long long int>::type*>
     T XLCellValue::Get() const {
 
-        if constexpr (std::is_same<T, bool>::value) {
+        if (std::is_same<T, bool>::value) {
             return GetBoolean();
         }
         else {

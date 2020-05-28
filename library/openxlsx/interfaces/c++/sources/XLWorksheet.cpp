@@ -22,12 +22,12 @@ const XLCell XLWorksheet::Cell(const XLCellReference& ref) const {
     return XLCell(*dynamic_cast<Impl::XLWorksheet*>(m_sheet)->Cell(ref.Address()));
 }
 
-XLCell XLWorksheet::Cell(const std::string& address) {
+XLCell XLWorksheet::Cell(const XLString& address) {
 
     return XLCell(*dynamic_cast<Impl::XLWorksheet*>(m_sheet)->Cell(address));
 }
 
-const XLCell XLWorksheet::Cell(const std::string& address) const {
+const XLCell XLWorksheet::Cell(const XLString& address) const {
 
     return XLCell(*dynamic_cast<Impl::XLWorksheet*>(m_sheet)->Cell(address));
 }
@@ -104,13 +104,13 @@ unsigned long XLWorksheet::RowCount() const noexcept {
     return dynamic_cast<Impl::XLWorksheet*>(m_sheet)->RowCount();
 }
 
-void XLWorksheet::Export(const std::string& fileName, char decimal, char delimiter) {
+void XLWorksheet::Export(const XLString& fileName, char decimal, char delimiter) {
 
     dynamic_cast<Impl::XLWorksheet*>(m_sheet)->Export(fileName, decimal, delimiter);
 
 }
 
-void XLWorksheet::Import(const std::string& fileName, const std::string& delimiter) {
+void XLWorksheet::Import(const XLString& fileName, const XLString& delimiter) {
 
     dynamic_cast<Impl::XLWorksheet*>(m_sheet)->Import(fileName, delimiter);
 

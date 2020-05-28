@@ -28,79 +28,79 @@ const XLSheet XLWorkbook::Sheet(unsigned int index) const {
 }
 
 /**********************************************************************************************************************/
-XLSheet XLWorkbook::Sheet(const std::string& sheetName) {
+XLSheet XLWorkbook::Sheet(const XLString& sheetName) {
 
     return XLSheet(*m_workbook->Sheet(sheetName));
 }
 
 /**********************************************************************************************************************/
-const XLSheet XLWorkbook::Sheet(const std::string& sheetName) const {
+const XLSheet XLWorkbook::Sheet(const XLString& sheetName) const {
 
     return static_cast<const XLSheet>(*m_workbook->Sheet(sheetName));
 }
 
 /**********************************************************************************************************************/
-XLWorksheet XLWorkbook::Worksheet(const std::string& sheetName) {
+XLWorksheet XLWorkbook::Worksheet(const XLString& sheetName) {
 
     return XLWorksheet(*m_workbook->Worksheet(sheetName));
 }
 
 /**********************************************************************************************************************/
-const XLWorksheet XLWorkbook::Worksheet(const std::string& sheetName) const {
+const XLWorksheet XLWorkbook::Worksheet(const XLString& sheetName) const {
 
     return static_cast<const XLWorksheet>(*m_workbook->Worksheet(sheetName));
 }
 
 /**********************************************************************************************************************/
-XLChartsheet XLWorkbook::Chartsheet(const std::string& sheetName) {
+XLChartsheet XLWorkbook::Chartsheet(const XLString& sheetName) {
 
     return XLChartsheet(*m_workbook->Chartsheet(sheetName));
 }
 
 /**********************************************************************************************************************/
-const XLChartsheet XLWorkbook::Chartsheet(const std::string& sheetName) const {
+const XLChartsheet XLWorkbook::Chartsheet(const XLString& sheetName) const {
 
     return static_cast<const XLChartsheet>(*m_workbook->Chartsheet(sheetName));
 }
 
 /**********************************************************************************************************************/
-void XLWorkbook::DeleteSheet(const std::string& sheetName) {
+void XLWorkbook::DeleteSheet(const XLString& sheetName) {
 
     m_workbook->DeleteSheet(sheetName);
 }
 
 /**********************************************************************************************************************/
-void XLWorkbook::AddWorksheet(const std::string& sheetName, unsigned int index) {
+void XLWorkbook::AddWorksheet(const XLString& sheetName, unsigned int index) {
 
     m_workbook->AddWorksheet(sheetName, index);
 }
 
 /**********************************************************************************************************************/
-void XLWorkbook::CloneWorksheet(const std::string& extName, const std::string& newName, unsigned int index) {
+void XLWorkbook::CloneWorksheet(const XLString& extName, const XLString& newName, unsigned int index) {
 
     m_workbook->CloneWorksheet(extName, newName, index);
 }
 
 /**********************************************************************************************************************/
-void XLWorkbook::AddChartsheet(const std::string& sheetName, unsigned int index) {
+void XLWorkbook::AddChartsheet(const XLString& sheetName, unsigned int index) {
 
     m_workbook->AddChartsheet(sheetName, index);
 }
 
 /**********************************************************************************************************************/
-void XLWorkbook::MoveSheet(const std::string& sheetName, unsigned int index) {
+void XLWorkbook::MoveSheet(const XLString& sheetName, unsigned int index) {
 
     m_workbook->MoveSheet(sheetName, index);
 }
 
 /**********************************************************************************************************************/
-unsigned int XLWorkbook::IndexOfSheet(const std::string& sheetName) const {
+unsigned int XLWorkbook::IndexOfSheet(const XLString& sheetName) const {
 
     return m_workbook->IndexOfSheet(sheetName);
 }
 
 /**********************************************************************************************************************/
-XLSheetType XLWorkbook::TypeOfSheet(const std::string& sheetName) const {
+XLSheetType XLWorkbook::TypeOfSheet(const XLString& sheetName) const {
 
     return m_workbook->TypeOfSheet(sheetName);
 }
@@ -130,37 +130,58 @@ unsigned int XLWorkbook::ChartsheetCount() const {
 }
 
 /**********************************************************************************************************************/
-std::vector<std::string> XLWorkbook::SheetNames() const {
+bool XLWorkbook::SheetName(unsigned int index, char* buf, unsigned int bufLen) const {
 
-    return m_workbook->SheetNames();
+    const auto& list = m_workbook->SheetNames();
+		if (index < list.size())
+		{
+			strncpy(buf, list[index].c_str(), bufLen);
+			return true;
+		}
+
+		return false;
 }
 
 /**********************************************************************************************************************/
-std::vector<std::string> XLWorkbook::WorksheetNames() const {
+bool XLWorkbook::WorksheetName(unsigned int index, char* buf, unsigned int bufLen) const {
 
-    return m_workbook->WorksheetNames();
+    const auto& list = m_workbook->WorksheetNames();
+		if (index < list.size())
+		{
+			strncpy(buf, list[index].c_str(), bufLen);
+			return true;
+		}
+
+		return false;
 }
 
 /**********************************************************************************************************************/
-std::vector<std::string> XLWorkbook::ChartsheetNames() const {
+bool XLWorkbook::ChartsheetName(unsigned int index, char* buf, unsigned int bufLen) const {
 
-    return m_workbook->ChartsheetNames();
+		const auto& list = m_workbook->ChartsheetNames();
+		if (index < list.size())
+		{
+			strncpy(buf, list[index].c_str(), bufLen);
+			return true;
+		}
+
+		return false;
 }
 
 /**********************************************************************************************************************/
-bool XLWorkbook::SheetExists(const std::string& sheetName) const {
+bool XLWorkbook::SheetExists(const XLString& sheetName) const {
 
     return m_workbook->SheetExists(sheetName);
 }
 
 /**********************************************************************************************************************/
-bool XLWorkbook::WorksheetExists(const std::string& sheetName) const {
+bool XLWorkbook::WorksheetExists(const XLString& sheetName) const {
 
     return m_workbook->WorksheetExists(sheetName);
 }
 
 /**********************************************************************************************************************/
-bool XLWorkbook::ChartsheetExists(const std::string& sheetName) const {
+bool XLWorkbook::ChartsheetExists(const XLString& sheetName) const {
 
     return m_workbook->ChartsheetExists(sheetName);
 }

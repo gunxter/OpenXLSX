@@ -46,9 +46,8 @@ YM      M9  MM    MM MM       MM    MM   d'  `MM.    MM            MM   d'  `MM.
 #ifndef OPENXLSX_XLSHEET_H
 #define OPENXLSX_XLSHEET_H
 
-#include <string>
-
 #include "openxlsx_export.h"
+#include "XLString.h"
 #include "XLDefinitions.h"
 
 namespace OpenXLSX
@@ -108,15 +107,15 @@ namespace OpenXLSX
 
         /**
          * @brief Method to retrieve the name of the sheet.
-         * @return A std::string with the sheet name.
+         * @return A XLString with the sheet name.
          */
-        virtual std::string const Name() const;
+        //virtual XLString const Name() const;
 
         /**
          * @brief Method for renaming the sheet.
-         * @param name A std::string with the new name.
+         * @param name A XLString with the new name.
          */
-        virtual void SetName(const std::string& name);
+        virtual void SetName(const XLString& name);
 
         /**
          * @brief Method for getting the current visibility state of the sheet.
@@ -138,11 +137,11 @@ namespace OpenXLSX
 
         //**
         // * @brief Method for cloning the sheet.
-        // * @param newName A std::string with the name of the clone
+        // * @param newName A XLString with the name of the clone
         // * @return A pointer to the cloned object.
         // * @note This is a pure abstract method. I.e. it is implemented in subclasses.
         // */
-        //        virtual XLSheet* Clone(const std::string& newName) = 0;
+        //        virtual XLSheet* Clone(const XLString& newName) = 0;
 
         /**
          * @brief Method for getting the index of the sheet.

@@ -13,19 +13,19 @@ XLDocument::XLDocument()
 }
 
 /**********************************************************************************************************************/
-XLDocument::XLDocument(const std::string& name)
+XLDocument::XLDocument(const XLString& name)
         : m_document(std::make_shared<Impl::XLDocument>(name)) {
 }
 
 /**********************************************************************************************************************/
-void XLDocument::OpenDocument(const std::string& fileName) {
+void XLDocument::OpenDocument(const XLString& fileName) {
 
     m_document = std::make_shared<Impl::XLDocument>();
     m_document->OpenDocument(fileName);
 }
 
 /**********************************************************************************************************************/
-void XLDocument::CreateDocument(const std::string& fileName) {
+void XLDocument::CreateDocument(const XLString& fileName) {
 
     if (!m_document)
         m_document = std::make_shared<Impl::XLDocument>();
@@ -50,7 +50,7 @@ bool XLDocument::SaveDocument() {
 }
 
 /**********************************************************************************************************************/
-bool XLDocument::SaveDocumentAs(const std::string& fileName) {
+bool XLDocument::SaveDocumentAs(const XLString& fileName) {
 
     if (!m_document)
         throw XLException("Invalid XLDocument object!");
@@ -58,20 +58,20 @@ bool XLDocument::SaveDocumentAs(const std::string& fileName) {
 }
 
 /**********************************************************************************************************************/
-const std::string& XLDocument::DocumentName() const {
+/*const XLString& XLDocument::DocumentName() const {
 
     if (!m_document)
         throw XLException("Invalid XLDocument object!");
     return m_document->DocumentName();
-}
+}*/
 
 /**********************************************************************************************************************/
-const std::string& XLDocument::DocumentPath() const {
+/*const XLString& XLDocument::DocumentPath() const {
 
     if (!m_document)
         throw XLException("Invalid XLDocument object!");
     return m_document->DocumentPath();
-}
+}*/
 
 /**********************************************************************************************************************/
 XLWorkbook XLDocument::Workbook() {
@@ -90,15 +90,15 @@ const XLWorkbook XLDocument::Workbook() const {
 }
 
 /**********************************************************************************************************************/
-std::string XLDocument::GetProperty(XLProperty theProperty) const {
+/*XLString XLDocument::GetProperty(XLProperty theProperty) const {
 
     if (!m_document)
         throw XLException("Invalid XLDocument object!");
     return m_document->GetProperty(theProperty);
-}
+}*/
 
 /**********************************************************************************************************************/
-void XLDocument::SetProperty(XLProperty theProperty, const std::string& value) {
+void XLDocument::SetProperty(XLProperty theProperty, const XLString& value) {
 
     if (!m_document)
         throw XLException("Invalid XLDocument object!");

@@ -46,10 +46,10 @@ YM      M9  MM    MM MM       MM    MM   d'  `MM.    MM            MM   d'  `MM.
 #ifndef OPENXLSX_XLCELLREFERENCE_H
 #define OPENXLSX_XLCELLREFERENCE_H
 
-#include <string>
 #include <memory>
 
 #include "openxlsx_export.h"
+#include "XLString.h"
 
 namespace OpenXLSX
 {
@@ -63,6 +63,8 @@ namespace OpenXLSX
      */
     class OPENXLSX_EXPORT XLCellReference
     {
+			friend class XLWorksheet;
+
     public:
 
         /**
@@ -75,7 +77,7 @@ namespace OpenXLSX
          * @brief
          * @param cellAddress
          */
-        explicit XLCellReference(const std::string& cellAddress = "");
+        explicit XLCellReference(const XLString& cellAddress = "");
 
         /**
          * @brief
@@ -146,19 +148,10 @@ namespace OpenXLSX
          */
         void SetRowAndColumn(unsigned long row, unsigned int column);
 
-        /**
-         * @brief
-         * @return
-         */
-        std::string Address() const;
-
-        /**
-         * @brief
-         * @param address
-         */
-        void SetAddress(const std::string& address);
-
     private:
+				std::string Address() const;
+				void SetAddress(const std::string& address);
+
         std::unique_ptr<Impl::XLCellReference> m_cellReference; /**< */
 
     };

@@ -47,6 +47,7 @@ YM      M9  MM    MM MM       MM    MM   d'  `MM.    MM            MM   d'  `MM.
 #define OPENXLSX_XLWORKSHEET_H
 
 #include "openxlsx_export.h"
+#include "XLString.h"
 #include "XLSheet.h"
 #include "XLCellReference.h"
 #include "XLCell.h"
@@ -124,14 +125,14 @@ namespace OpenXLSX
          * @param address The address of the cell to get, e.g. 'A1'
          * @return A reference to the XLCell object at the given address
          */
-        XLCell Cell(const std::string& address);
+        XLCell Cell(const XLString& address);
 
         /**
          * @brief Get the cell with the given address
          * @param address The address of the cell to get, e.g. 'A1'
          * @return A const reference to the XLCell object at the given address
          */
-        const XLCell Cell(const std::string& address) const;
+        const XLCell Cell(const XLString& address) const;
 
         /**
          * @brief Get the cell at the given coordinates.
@@ -235,14 +236,14 @@ namespace OpenXLSX
          * @param decimal
          * @param delimiter
          */
-        void Export(const std::string& fileName, char decimal = ',', char delimiter = ';');
+        void Export(const XLString& fileName, char decimal = ',', char delimiter = ';');
 
         /**
          * @brief
          * @param fileName
          * @param delimiter
          */
-        void Import(const std::string& fileName, const std::string& delimiter = ";");
+        void Import(const XLString& fileName, const XLString& delimiter = ";");
 
     };
 } // namespace OpenXLSX

@@ -46,9 +46,8 @@ YM      M9  MM    MM MM       MM    MM   d'  `MM.    MM            MM   d'  `MM.
 #ifndef OPENXLSX_XLWORKBOOK_H
 #define OPENXLSX_XLWORKBOOK_H
 
-#include <string>
-
 #include "openxlsx_export.h"
+#include "XLString.h"
 #include "XLSheet.h"
 #include "XLWorksheet.h"
 #include "XLChartsheet.h"
@@ -134,7 +133,7 @@ namespace OpenXLSX
          * @todo This method is currently unimplemented.
          * @todo What should happen if the name is invalid?
          */
-        XLSheet Sheet(const std::string& sheetName);
+        XLSheet Sheet(const XLString& sheetName);
 
         /**
          * @brief Get the sheet (worksheet or chartsheet) with the given name.
@@ -143,48 +142,48 @@ namespace OpenXLSX
          * @todo This method is currently unimplemented.
          * @todo What should happen if the name is invalid?
          */
-        const XLSheet Sheet(const std::string& sheetName) const;
+        const XLSheet Sheet(const XLString& sheetName) const;
 
         /**
          * @brief
          * @param sheetName
          * @return
          */
-        XLWorksheet Worksheet(const std::string& sheetName);
+        XLWorksheet Worksheet(const XLString& sheetName);
 
         /**
          * @brief
          * @param sheetName
          * @return
          */
-        const XLWorksheet Worksheet(const std::string& sheetName) const;
+        const XLWorksheet Worksheet(const XLString& sheetName) const;
 
         /**
          * @brief
          * @param sheetName
          * @return
          */
-        XLChartsheet Chartsheet(const std::string& sheetName);
+        XLChartsheet Chartsheet(const XLString& sheetName);
 
         /**
          * @brief
          * @param sheetName
          * @return
          */
-        const XLChartsheet Chartsheet(const std::string& sheetName) const;
+        const XLChartsheet Chartsheet(const XLString& sheetName) const;
 
         /**
          * @brief
          * @param sheetName
          */
-        void DeleteSheet(const std::string& sheetName);
+        void DeleteSheet(const XLString& sheetName);
 
         /**
          * @brief Add a new worksheet to the workbook, with the given name and index.
          * @param sheetName The name of the worksheet.
          * @param index The index at which the worksheet should be inserted.
          */
-        void AddWorksheet(const std::string& sheetName, unsigned int index = 0);
+        void AddWorksheet(const XLString& sheetName, unsigned int index = 0);
 
         /**
          * @brief Clone an existing worksheet.
@@ -194,7 +193,7 @@ namespace OpenXLSX
          * @todo The function works, but Excel reports errors when opening.
          * @todo Is it possible to have a common CloneSheet function?
          */
-        void CloneWorksheet(const std::string& extName, const std::string& newName, unsigned int index = 0);
+        void CloneWorksheet(const XLString& extName, const XLString& newName, unsigned int index = 0);
 
         /**
          * @brief Add a new chartsheet to the workbook, with the given name and index.
@@ -202,28 +201,28 @@ namespace OpenXLSX
          * @param index The index at which the chartsheet should be inserted.
          * @todo This method is currently unimplemented.
          */
-        void AddChartsheet(const std::string& sheetName, unsigned int index = 0);
+        void AddChartsheet(const XLString& sheetName, unsigned int index = 0);
 
         /**
          * @brief
          * @param sheetName
          * @param index
          */
-        void MoveSheet(const std::string& sheetName, unsigned int index);
+        void MoveSheet(const XLString& sheetName, unsigned int index);
 
         /**
          * @brief
          * @param sheetName
          * @return
          */
-        unsigned int IndexOfSheet(const std::string& sheetName) const;
+        unsigned int IndexOfSheet(const XLString& sheetName) const;
 
         /**
          * @brief
          * @param sheetName
          * @return
          */
-        XLSheetType TypeOfSheet(const std::string& sheetName) const;
+        XLSheetType TypeOfSheet(const XLString& sheetName) const;
 
         /**
          * @brief
@@ -254,40 +253,40 @@ namespace OpenXLSX
          * @brief
          * @return
          */
-        std::vector<std::string> SheetNames() const;
+				bool SheetName(unsigned int index, char* buf, unsigned int bufLen) const;
+        
+        /**
+         * @brief
+         * @return
+         */
+				bool WorksheetName(unsigned int index, char* buf, unsigned int bufLen) const;
 
         /**
          * @brief
          * @return
          */
-        std::vector<std::string> WorksheetNames() const;
-
+				bool ChartsheetName(unsigned int index, char* buf, unsigned int bufLen) const;
+        
         /**
          * @brief
+         * @param sheetName
          * @return
          */
-        std::vector<std::string> ChartsheetNames() const;
+        bool SheetExists(const XLString& sheetName) const;
 
         /**
          * @brief
          * @param sheetName
          * @return
          */
-        bool SheetExists(const std::string& sheetName) const;
+        bool WorksheetExists(const XLString& sheetName) const;
 
         /**
          * @brief
          * @param sheetName
          * @return
          */
-        bool WorksheetExists(const std::string& sheetName) const;
-
-        /**
-         * @brief
-         * @param sheetName
-         * @return
-         */
-        bool ChartsheetExists(const std::string& sheetName) const;
+        bool ChartsheetExists(const XLString& sheetName) const;
 
         /**
          * @brief

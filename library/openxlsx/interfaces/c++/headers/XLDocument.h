@@ -49,6 +49,7 @@ YM      M9  MM    MM MM       MM    MM   d'  `MM.    MM            MM   d'  `MM.
 #include <memory>
 
 #include "openxlsx_export.h"
+#include "XLString.h"
 #include "XLDefinitions.h"
 #include "XLWorkbook.h"
 
@@ -101,7 +102,7 @@ namespace OpenXLSX
          * @brief
          * @param name
          */
-        explicit XLDocument(const std::string& name);
+        explicit XLDocument(const XLString& name);
 
         /**
          * @brief
@@ -139,13 +140,13 @@ namespace OpenXLSX
          * @param fileName The path of the .xlsx file to open
          * @todo Consider opening the zipped files as streams, instead of unpacking to a temporary folder
          */
-        void OpenDocument(const std::string& fileName);
+        void OpenDocument(const XLString& fileName);
 
         /**
          * @brief Create a new .xlsx file with the given name.
          * @param fileName The path of the new .xlsx file.
          */
-        void CreateDocument(const std::string& fileName);
+        void CreateDocument(const XLString& fileName);
 
         /**
          * @brief Close the current document
@@ -163,19 +164,19 @@ namespace OpenXLSX
          * @param fileName The path of the file
          * @return true if successful; otherwise false.
          */
-        bool SaveDocumentAs(const std::string& fileName);
+        bool SaveDocumentAs(const XLString& fileName);
 
         /**
          * @brief Get the filename of the current document, e.g. "spreadsheet.xlsx".
-         * @return A std::string with the filename.
+         * @return A XLString with the filename.
          */
-        const std::string& DocumentName() const;
+        //const XLString& DocumentName() const;
 
         /**
          * @brief Get the full path of the current document, e.g. "drive/blah/spreadsheet.xlsx"
-         * @return A std::string with the path.
+         * @return A XLString with the path.
          */
-        const std::string& DocumentPath() const;
+        //const XLString& DocumentPath() const;
 
         /**
          * @brief Get the underlying workbook object.
@@ -194,14 +195,14 @@ namespace OpenXLSX
          * @param theProperty The name of the property to get.
          * @return The property as a string
          */
-        std::string GetProperty(XLProperty theProperty) const;
+        XLString GetProperty(XLProperty theProperty) const;
 
         /**
          * @brief Set a property
          * @param theProperty The property to set.
          * @param value The value of the property, as a string
          */
-        void SetProperty(XLProperty theProperty, const std::string& value);
+        void SetProperty(XLProperty theProperty, const XLString& value);
 
         /**
          * @brief Delete the property from the document

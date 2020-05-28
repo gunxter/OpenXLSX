@@ -15,7 +15,7 @@ XLCellReference::XLCellReference(const Impl::XLCellReference& sheet)
 
 }
 
-XLCellReference::XLCellReference(const std::string& cellAddress)
+XLCellReference::XLCellReference(const XLString& cellAddress)
         : m_cellReference(make_unique<Impl::XLCellReference>(Impl::XLCellReference(cellAddress))) {
 
 }
@@ -67,12 +67,12 @@ void XLCellReference::SetRowAndColumn(unsigned long row, unsigned int column) {
     m_cellReference->SetRowAndColumn(row, column);
 }
 
-std::string XLCellReference::Address() const {
+string XLCellReference::Address() const {
 
     return m_cellReference->Address();
 }
 
-void XLCellReference::SetAddress(const std::string& address) {
+void XLCellReference::SetAddress(const string& address) {
 
     m_cellReference->SetAddress(address);
 }
